@@ -2,11 +2,8 @@
 
 
 ## Vaisala Stream API
-```
-  mermaid
+```mermaid
   info
-
-
 
 ```
 
