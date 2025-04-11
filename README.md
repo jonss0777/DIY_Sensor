@@ -3,7 +3,7 @@
 
 ## Vaisala Stream API
 ```mermaid
-graph LR;
+graph TD;
   id1(VaisalaStreamAPI) --> |Cache until the for a date time is full|id2(NodeRED);   
   id2 --> |Send row with 8 datapoints|id3[(PostgreSQL)];
   
@@ -17,7 +17,7 @@ graph LR;
 ## AppScript Stream
 
 ```mermaid
-graph LR;
+graph TD;
   id1(AppScript) --> id2(NodeRED);
   id2 --> id3[(PostgreSQL)];
 
