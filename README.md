@@ -34,7 +34,7 @@
         A1[Sensor Collects Data]
     end
 
-    subgraph AppScript
+    subgraph Google Cloud
         B1[App Script Receiveces Request] --> B2[Google Sheets]
     end
 
