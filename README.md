@@ -5,17 +5,13 @@
 ```mermaid
   flowchart TD
     subgraph Vaisala
-        A1[Vaisala]
+        A1["[Measurement Stream API](https://api-catalog.eu.platform.xweather.com/docs/Measurement%20stream/stream-api)"]
     end
 
-    subgraph Process B
+    subgraph Local
        B1[Node Red] --> B2[PostgreSQL]
-        
     end
-
-
-
-    A1 -->  |Cache the data until a row is full|B1
+    A1 --> B1
 
 ```
 
