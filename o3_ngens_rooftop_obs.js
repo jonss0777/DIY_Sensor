@@ -68,7 +68,7 @@ function doPost(e) {
   if (parsedData !== undefined) {
     switch (parsedData.command) {
       case "appendRow":
-        let tmp = SS.getSheetByName(parsedData.sheet_name); // Shouldn't this just be sheet (from line 59)  instead or should it be based on the users preference?
+        let tmp = SS.getSheetByName(parsedData.sheet_name); 
         let dataArr = parsedData.values.split(",");
         let d = new Date();
 
