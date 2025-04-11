@@ -16,7 +16,7 @@
 
     end
 
-    A1 -->|HTTP GET Response Data Stream|B1
+    A1 -->|HTTP GET Response |B1
 
 
 ```
