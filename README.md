@@ -1,8 +1,5 @@
 # Streaming sensor data into PostgreSQL
 
-
-
-
 ## Vaisala Stream API
 ```mermaid
   flowchart TD
@@ -26,7 +23,7 @@
 
 
 
-## AppScript Stream
+## Google Cloud Stream
 
 ```mermaid
   flowchart TD
