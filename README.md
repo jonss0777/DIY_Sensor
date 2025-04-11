@@ -27,6 +27,21 @@
 ## AppScript Stream
 
 ```mermaid
+  flowchart TD
+    subgraph Sensor
+        A1[Sensor Collects Data]
+    end
+
+    subgraph AppScript
+        B1[App Script Receivces Request]
+    end
+
+    subgraph Local
+        C1[Node-RED] --> B2[PostgreSQL]
+    end
+
+    A1 --> B1
+    B1 --> C1
 
 ```
 
