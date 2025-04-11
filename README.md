@@ -4,8 +4,9 @@
 ## Vaisala Stream API
 ```mermaid
 graph LR;
-  id1(VaisalaStreamAPI) --> id2(NodeRED);   A@{ shape: braces, label: "Comment" }
+  id1(VaisalaStreamAPI) --> |Process data|id2(NodeRED);   A@{ shape: braces, label: "Comment" }
   id2 --> id3[(PostgreSQL)];
+  
 
 
 ```
