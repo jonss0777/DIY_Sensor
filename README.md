@@ -9,13 +9,13 @@
     end
 
     subgraph Process B
-        |Cache the data until a row is full|B1[Node Red] --> B2[PostgreSQL]
+       B1[Node Red] --> B2[PostgreSQL]
         
     end
 
 
 
-    A1 --> B1
+    A1 -->  |Cache the data until a row is full|B1
 
 ```
 
