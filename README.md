@@ -1,6 +1,10 @@
 # Streaming sensor data into PostgreSQL
 
-## Vaisala Stream API
+
+<details>
+  
+<summary>Vaisala Stream</summary>
+
 ```mermaid
   flowchart TD
     subgraph Vaisala
@@ -15,15 +19,16 @@
 
     A1 -->|HTTP GET Response |B1
 
-
 ```
 
+</details>
 
 
 
 
 
-## Google Cloud Stream
+<details>
+<summary>Google Cloud Stream</summary>
 
 ```mermaid
   flowchart TD
@@ -43,6 +48,7 @@
     B1 --> |HTTP POST Request|C1
 
 ```
+</details>
 
 ### References:
   + [Meassurement Stream API](https://api-catalog.eu.platform.xweather.com/docs/Measurement%20stream/stream-api)
