@@ -4,8 +4,8 @@
 ## Vaisala Stream API
 ```mermaid
 graph LR;
-  id1(VaisalaStreamAPI) --> |Process data|id2(NodeRED);   A@{ shape: braces, label: "Comment" }
-  id2 --> id3[(PostgreSQL)];
+  id1(VaisalaStreamAPI) --> |Cache until the for a date time is full|id2(NodeRED);   
+  id2 --> |Send row with 8 datapoints|id3[(PostgreSQL)];
   
 
 
