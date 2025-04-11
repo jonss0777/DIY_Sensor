@@ -3,7 +3,7 @@
 
 ## Vaisala Stream API
 ```mermaid
-  graph TD;
+graph TD;
   VaisalaStreamAPI -> NodeRED;
   NodeRED -> PostgreSQL;
 
