@@ -4,8 +4,8 @@
 ## Vaisala Stream API
 ```mermaid
 graph LR;
-  VaisalaStreamAPI --> NodeRED;
-  NodeRED --> PostgreSQL;
+  id1(VaisalaStreamAPI) --> id2(NodeRED);
+  2 --> [(PostgreSQL)];
 
 ```
 
@@ -16,8 +16,8 @@ graph LR;
 
 ```mermaid
 graph LR;
-  AppScript --> NodeRED;
-  NodeRED --> PostgreSQL;
+  id1(AppScript) --> id2(NodeRED);
+  id2 --> [(PostgreSQL)];
 
 ```
 
