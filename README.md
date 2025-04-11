@@ -16,7 +16,7 @@
 
     end
 
-    A1 -->|HTTP GET Response - Data Stream| B1
+    A1 -->|HTTP GET Response Data Stream|B1
 
 
 ```
@@ -39,7 +39,7 @@
     end
 
     subgraph Local
-        C1[Node-RED] --> B2[PostgreSQL]
+        C1[Node-RED] --> C2[PostgreSQL]
     end
 
     A1 --> |HTTP POST Request|B1
