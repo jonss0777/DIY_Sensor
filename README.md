@@ -8,10 +8,12 @@
   flowchart TD
     subgraph Vaisala
         A1[Measurement Stream API]
+
     end
 
     subgraph Local
         B1[Node-RED] --> B2[PostgreSQL]
+
     end
 
     A1 -->|HTTP GET Response - Data Stream| B1
@@ -33,7 +35,7 @@
     end
 
     subgraph AppScript
-        B1[App Script Receivces Request]
+        B1[App Script Receiveces Request] --> B2[Google Sheets]
     end
 
     subgraph Local
