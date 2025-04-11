@@ -5,7 +5,7 @@
 ```mermaid
 graph LR;
   id1(VaisalaStreamAPI) --> id2(NodeRED);
-  2 --> [(PostgreSQL)];
+  id2 --> [(PostgreSQL)];
 
 ```
 
