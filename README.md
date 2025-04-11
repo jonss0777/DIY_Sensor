@@ -17,9 +17,10 @@ graph TD;
 
 ```mermaid
 graph TD;
-  id1(AppScript) --> |Process data|id2(NodeRED);   
+  id1(AppScript) --> |Process data|id2(NodeRED);
+  id1 --> |Two|id4(Google Sheet);
   id2 --> |One|id3[(PostgreSQL)];
-  id2 --> |Two|id4(Google Sheet);
+  
 ```
 ```
 
