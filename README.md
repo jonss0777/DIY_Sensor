@@ -1,11 +1,13 @@
 # Streaming sensor data into PostgreSQL
 
 
+
+
 ## Vaisala Stream API
 ```mermaid
   flowchart TD
     subgraph Vaisala
-        A1["[Measurement Stream API](https://api-catalog.eu.platform.xweather.com/docs/Measurement%20stream/stream-api)"]
+        A1[Measurement Stream API]
     end
 
     subgraph Local
@@ -27,7 +29,12 @@
 ```mermaid
 
 ```
-```
+
+### References:
+  + [Meassurement Stream API](https://api-catalog.eu.platform.xweather.com/docs/Measurement%20stream/stream-api)"
+
+
+
 
 
 
