@@ -12,6 +12,9 @@
 // For testing end points - https://reqbin.com/curl 
 // BetterLog     - https://github.com/peterherrmann/BetterLog 
 
+// Payload example:
+// sprintf(outstr, "%02u/%02u/%02u %02u:%02u:%02u, %.2d, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %x",year,month,day,hour,minute,second,CO2,Tco2,RHco2,Tbme,Pbme,RHbme,measuredvbat,stat);
+// String payload = "{\"command\":\"appendRow\",\"sheet_name\":\"Sheet1\",\"values\":" + "\"" + outstr + "\"}"
 
 /********************************************************************************
  * Function to send data to Node Red endpoint(/...) 
