@@ -9,9 +9,11 @@
     end
 
     subgraph Local
-       B1[Node Red] --> B2[PostgreSQL]
+        B1[Node-RED] --> B2[PostgreSQL]
     end
-    A1 --> B1
+
+    A1 -->|Data Stream| B1
+
 
 ```
 
