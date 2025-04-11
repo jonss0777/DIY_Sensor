@@ -14,7 +14,7 @@
         B1[Node-RED] --> B2[PostgreSQL]
     end
 
-    A1 -->|Data Stream| B1
+    A1 -->|HTTP GET Response - Data Stream| B1
 
 
 ```
@@ -40,8 +40,8 @@
         C1[Node-RED] --> B2[PostgreSQL]
     end
 
-    A1 --> B1
-    B1 --> C1
+    A1 --> |HTTP POST Request|B1
+    B1 --> |HTTP POST Request|C1
 
 ```
 
