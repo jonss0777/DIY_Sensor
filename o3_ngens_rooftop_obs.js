@@ -1,3 +1,4 @@
+// Edited by Jonathan S, January 2025
 // Credits to Sujay S. Phadke, 2017
 // Github: https://github.com/electronicsguy
 // Read/Write to Google Sheets using REST API.
