@@ -8,7 +8,7 @@
 
 ```mermaid
   flowchart TD
-    subgraph Vaisala
+    subgraph Vaisala Sensor
         A1[Measurement Stream API]
 
     end
