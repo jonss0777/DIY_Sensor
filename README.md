@@ -15,7 +15,7 @@
     end
 
     subgraph Local
-        C1[Node-RED] --> C2[PostgreSQL]
+        C1[Fetch from AppScript] --> C2[UI DIY Sensor]
     end
 
     A1 --> |HTTP POST Request|B1
