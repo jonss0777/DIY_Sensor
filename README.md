@@ -11,11 +11,12 @@
     end
 
     subgraph Google Cloud
-        B1[App Script Receiveces Request] --> B2[Google Sheets]
+        B1[App Script receiveces a Post request from micro-controller] --> B2[Google Sheets]
+        B1[App Script receiveces a Post request from UI] --> B2[Google Sheets]
     end
 
-    subgraph Local
-        C1[Fetch from AppScript] --> C2[UI DIY Sensor]
+    subgraph Hosted on Github
+        C1[Response from AppScript API] --> C2[Display Data in UI for DIY Sensor]
     end
 
     A1 --> |HTTP POST Request|B1
