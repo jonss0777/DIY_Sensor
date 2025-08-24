@@ -26,6 +26,6 @@ Components you will need:
 
 
 Reference: 
-[Google Sheets API](https://developers.google.com/workspace/sheets/api/guides/concepts)
-[Google AppScript API](https://developers.google.com/apps-script/api/reference/rest)
-[Mozilla HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP)
+ - [Google Sheets API](https://developers.google.com/workspace/sheets/api/guides/concepts)
+ - [Google AppScript API](https://developers.google.com/apps-script/api/reference/rest)
+ - [Mozilla HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP)
