@@ -11,8 +11,8 @@
     end
 
     subgraph Google Cloud
-        B1[App Script receiveces a Post request from micro-controller] --> B2[Google Sheets]
-        B1[App Script receiveces a Post request from UI] <-- B2[Google Sheets]
+        B1[App Script receiveces a Post request from micro-controller/  from UI] <--> B2[Google Sheets]
+       
     end
 
     subgraph Hosted on Github
