@@ -1,9 +1,5 @@
 # DIY Sensor Architechture
 
-
-
-## DIY Sensor Data Pipeline
-
 ```mermaid
   flowchart TD
     subgraph Sensor
