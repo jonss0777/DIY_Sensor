@@ -23,6 +23,7 @@
 Components you will need:
  - Adafruit M0 feather micro controller with WiFi shield 
  - DHT11 Keys Temperature and Humidity Sensor
+ - Optional [LM35](https://www.keyestudio.com/products/free-shippingkeyestudio-lm35-linear-temperature-sensor-module-for-arduino), [18820](https://wiki.keyestudio.com/Ks0023_keyestudio_18B20_Temperature_Sensor) temperature sensors.
 
 
 Reference: 
