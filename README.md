@@ -16,7 +16,7 @@
     end
 
     A1 --> |HTTP POST Request|B1
-    B1 --> |HTTP POST Request|C1
+    B1 <--> |HTTP POST Request|C1
 
 ```
 
