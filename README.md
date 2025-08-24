@@ -1,8 +1,8 @@
 # DIY Sensor Architechture
 
 
-<details>
-<summary>DIY Sensor Data Pipeline</summary>
+
+## DIY Sensor Data Pipeline
 
 ```mermaid
   flowchart TD
@@ -16,11 +16,11 @@
     end
 
     subgraph Hosted on Github
-        C1[Response from AppScript API] --> C2[Display Data in UI for DIY Sensor]
+        C1[Response from AppScript API] <--> C2[Display Data in UI for DIY Sensor]
     end
 
     A1 --> |HTTP POST Request|B1
     B1 --> |HTTP POST Request|C1
 
 ```
-</details>
+
