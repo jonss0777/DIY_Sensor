@@ -1,5 +1,5 @@
 /*!
-* @brief
+* @brief Initalize DHT11 and display sensor information.
 * @param
 */
 
@@ -34,7 +34,7 @@ void initializeDHT11(){
 }
 
 /*!
-* @brief
+* @brief Run DHT11 and store data in global data struct.
 * @param
 */
 
@@ -69,4 +69,5 @@ void runDHT11(){
   Serial.println(F(" %\n"));
 
  
+
 }
