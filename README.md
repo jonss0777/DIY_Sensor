@@ -1,8 +1,12 @@
+
+# DIY Sensor 
+
 Hi! 
 
 Welcome to one of my projects. This project uses a DHT11 temperature and humidity sensor, an Adafruit M0 fether with a WIFI chip to send and receive information from a mini api server running on AppScript. 
 
-# DIY Sensor Architechture
+
+### Architechture
 
 ```mermaid
   flowchart TD
