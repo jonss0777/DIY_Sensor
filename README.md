@@ -17,7 +17,7 @@
         C1[Response from AppScript WebApp] <--> C2[Display Data in UI for DIY Sensor]
     end
 
-    A1 --> |HTTP POST Request -> Display sensor data in UI|
+    [HTTP POST Request -> Display sensor data in UI]
 ```
 
 Components you will need:
@@ -43,7 +43,7 @@ Components you will need:
         C1[Response from ] <--> C2[Display Data in UI for DIY Sensor]
     end
 
-    A1 --> |Subscribe to "topic" -> Display live time Sensor Data|
+    [Subscribe to "topic" -> Display live time Sensor Data]
 ```
    
 Reference: 
