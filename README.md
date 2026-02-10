@@ -1,11 +1,5 @@
 
 # DIY Sensor 
-
-Hi! 
-
-This project uses a DHT11 temperature and humidity sensor, an ESP32 Wrover IE with a WIFI chip to send and receive information from a mini api server running on AppScript, alternatively the MQTT version uses HiveMQ as the broker. 
-
-
 ### Architechture HTTP
 
 ```mermaid
@@ -15,30 +9,46 @@ This project uses a DHT11 temperature and humidity sensor, an ESP32 Wrover IE wi
     end
 
     subgraph Google Cloud
-        B1[App Script receiveces a Post request from micro-controller/  from UI] <--> B2[Google Sheets]
+        B1[App Script Server receiveces a Post request from micro-controller] <--> B2[Google Sheets]
+       
+    end
+
+    subgraph Hosted on ***
+        C1[Response from AppScript WebApp] <--> C2[Display Data in UI for DIY Sensor]
+    end
+
+    A1 --> |HTTP POST Request -> Display sensor data in UI|
+```
+
+Components you will need:
+ - ESP32 
+ - DHT11 Keys Temperature and Humidity Sensor
+ - Services AppScript or HiveMQ
+
+
+### Architechture MQTT
+
+```mermaid
+  flowchart TD
+    subgraph Sensor
+        A1[Sensor Collects Data]
+    end
+
+    subgraph HiveMQ Server
+        B1[HiveMQ Server receiveces a published to "topic" from micro-controller] <--> B2[Google Sheets]
        
     end
 
     subgraph Hosted on Github
-        C1[Response from AppScript API] <--> C2[Display Data in UI for DIY Sensor]
+        C1[Response from ] <--> C2[Display Data in UI for DIY Sensor]
     end
 
-    A1 --> |HTTP POST Request|B1
-    B1 <--> |HTTP POST Request|C1
+    A1 --> |Subscribe to "topic" -> Display live time Sensor Data|
 ```
-
-Components you will need:
- - Adafruit M0 feather micro controller with WiFi shield 
- - DHT11 Keys Temperature and Humidity Sensor
- - Optional [LM35](https://www.keyestudio.com/products/free-shippingkeyestudio-lm35-linear-temperature-sensor-module-for-arduino), [18820](https://wiki.keyestudio.com/Ks0023_keyestudio_18B20_Temperature_Sensor) temperature sensors.
-
-
+   
 Reference: 
- - [Google Sheets API](https://developers.google.com/workspace/sheets/api/guides/concepts)
- - [Google AppScript API](https://developers.google.com/apps-script/api/reference/rest)
- - [Mozilla HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP)
+ - [HiveMQ Guide](https://docs.hivemq.com/hivemq/latest/user-guide/index.html)
 
-### Architechture MQTT
 
 
 
