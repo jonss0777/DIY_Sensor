@@ -4,20 +4,11 @@
 
 ```mermaid
   flowchart TD
-    subgraph Sensor
-        A1[Sensor Collects Data]
-    end
-
-    subgraph Google Cloud
-        B1[App Script Server receiveces a Post request from micro-controller] <--> B2[Google Sheets]
-       
-    end
-
-    subgraph Hosted on ***
-        C1[Response from AppScript WebApp] <--> C2[Display Data in UI for DIY Sensor]
-    end
-
-    [HTTP POST Request -> Display sensor data in UI]
+    A[Christmas] -->|Get money| B(Go shopping)
+    B --> C{Let me think}
+    C -->|One| D[Laptop]
+    C -->|Two| E[iPhone]
+    C -->|Three| F[fa:fa-car Car]
 ```
 
 Components you will need:
