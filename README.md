@@ -14,7 +14,7 @@ Wiring:
   flowchart TD
     A[Micro controller] -->|Sends post request to AppScript| B(App Script Webserver handles the request by storing the information in a sheet and seding a success response.)
 
-    C[Spring Boot HTPP Client] -->B
+    C[Spring Boot HTPP Client] -->|Send get request to AppScript|B
   
 ```
 ### HTTP Client Code
@@ -33,7 +33,7 @@ Wiring:
 ```mermaid
    flowchart TD
     A[Micro controller] -->|Sends publish to topic| B(HiveMQ Server receiveces a published request to some topic from the micro controller.)
-    C[Spring Boot MQTT Client] -->B
+    C[Spring Boot MQTT Client] -->|Subscribe to HiveMQ Broker|B
 ```
 ### MQTT Client Code
 ```
