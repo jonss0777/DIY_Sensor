@@ -5,6 +5,8 @@ Components you will need:
  - DHT11 Keys Temperature and Humidity Sensor
  - Services AppScript or HiveMQ
 
+Wiring:
+
 
 ### Architechture HTTP
 
@@ -15,6 +17,16 @@ Components you will need:
     C[Spring Boot HTPP Client] -->B
   
 ```
+### HTTP Client Code
+```
+
+```
+
+### HTTP Sensor Code:
+```
+
+
+```
 
 ### Architechture MQTT
 
@@ -22,6 +34,17 @@ Components you will need:
    flowchart TD
     A[Micro controller] -->|Sends publish to topic| B(HiveMQ Server receiveces a published request to some topic from the micro controller.)
     C[Spring Boot MQTT Client] -->B
+```
+### MQTT Client Code
+```
+```
+
+
+
+### MQTT Sensor Code:
+```
+
+
 ```
    
 Reference: 
