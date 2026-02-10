@@ -35,7 +35,7 @@ Components you will need:
     end
 
     subgraph HiveMQ Server
-        B1[HiveMQ Server receiveces a published to "topic" from micro-controller] <--> B2[Google Sheets]
+        B1[HiveMQ Server receiveces a published to topic from micro-controller] <--> B2[Google Sheets]
        
     end
 
@@ -43,7 +43,7 @@ Components you will need:
         C1[Response from ] <--> C2[Display Data in UI for DIY Sensor]
     end
 
-    [Subscribe to "topic" -> Display live time Sensor Data]
+    [Subscribe to topic] -> Display live time Sensor Data]
 ```
    
 Reference: 
