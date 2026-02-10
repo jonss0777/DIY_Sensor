@@ -3,10 +3,10 @@
 
 Hi! 
 
-Welcome to one of my projects. This project uses a DHT11 temperature and humidity sensor, an Adafruit M0 feather with a WIFI chip to send and receive information from a mini api server running on AppScript. 
+This project uses a DHT11 temperature and humidity sensor, an ESP32 Wrover IE with a WIFI chip to send and receive information from a mini api server running on AppScript, alternatively the MQTT version uses HiveMQ as the broker. 
 
 
-### Architechture
+### Architechture HTTP
 
 ```mermaid
   flowchart TD
@@ -25,7 +25,6 @@ Welcome to one of my projects. This project uses a DHT11 temperature and humidit
 
     A1 --> |HTTP POST Request|B1
     B1 <--> |HTTP POST Request|C1
-
 ```
 
 Components you will need:
@@ -38,3 +37,8 @@ Reference:
  - [Google Sheets API](https://developers.google.com/workspace/sheets/api/guides/concepts)
  - [Google AppScript API](https://developers.google.com/apps-script/api/reference/rest)
  - [Mozilla HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP)
+
+### Architechture MQTT
+
+
+
