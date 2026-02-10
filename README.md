@@ -1,17 +1,17 @@
-
-# DIY Sensor 
-### Architechture HTTP
-
-```mermaid
-  flowchart TD
-    A[Micro controller] -->|Sends post request to AppScript| B(App Script Webserver handles the request by storing the information in a sheet and seding a success response.)
-```
+# DIY Sensor
 
 Components you will need:
  - ESP32 
  - DHT11 Keys Temperature and Humidity Sensor
  - Services AppScript or HiveMQ
 
+
+### Architechture HTTP
+
+```mermaid
+  flowchart TD
+    A[Micro controller] -->|Sends post request to AppScript| B(App Script Webserver handles the request by storing the information in a sheet and seding a success response.)
+```
 
 ### Architechture MQTT
 
