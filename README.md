@@ -17,7 +17,7 @@ Components you will need:
 
 ```mermaid
    flowchart TD
-    A[Micro controller] -->|Sends publish to topic| B(HiveMQ Server receiveces a published to "/topic"/ from micro-controller)
+    A[Micro controller] -->|Sends publish to topic| B(HiveMQ Server receiveces a published request to some topic from the micro controller.)
 ```
    
 Reference: 
