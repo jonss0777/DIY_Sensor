@@ -12,7 +12,7 @@ Components you will need:
   flowchart TD
     A[Micro controller] -->|Sends post request to AppScript| B(App Script Webserver handles the request by storing the information in a sheet and seding a success response.)
 
-    C[Client] -->B
+    C[Spring Boot HTPP Client] -->B
   
 ```
 
@@ -21,6 +21,7 @@ Components you will need:
 ```mermaid
    flowchart TD
     A[Micro controller] -->|Sends publish to topic| B(HiveMQ Server receiveces a published request to some topic from the micro controller.)
+    C[Spring Boot MQTT Client] -->B
 ```
    
 Reference: 
