@@ -4,11 +4,7 @@
 
 ```mermaid
   flowchart TD
-    A[Christmas] -->|Get money| B(Go shopping)
-    B --> C{Let me think}
-    C -->|One| D[Laptop]
-    C -->|Two| E[iPhone]
-    C -->|Three| F[fa:fa-car Car]
+    A[Micro controller] -->|Sends publish to topic| B(HiveMQ Server receiveces a published to "topic" from micro-controller)
 ```
 
 Components you will need:
