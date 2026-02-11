@@ -1,110 +1,85 @@
-/*
-This is an extension of the NGENS Air Quality Sensor Project. It includes support for the  
-DHT11 sensors. It also includes a website that can be hosted on github pages to visualize the collected data. 
-It does this by leveraging Google Sheets and AppScripts as a server. 
-
-Sensor Information: 
-DHT11 Humidity and Temperature
-
-  Info:
-  - DHT Sensor Library: https://github.com/adafruit/DHT-sensor-library
-  - Adafruit Unified Sensor Lib: https://github.com/adafruit/Adafruit_Sensor
-*/
-
-#include <OneWire.h>
-#include <Adafruit_Sensor.h>
+#include <WiFi.h>
+#include <HTTPClient.h>
+#include <WiFiClientSecure.h>
+#include <secrets.h>
 #include <DHT.h>
-#include <DHT_U.h>
-#include <string>
-#include <Wire.h>                
-#include <WiFi101.h>
 
-#define DHTPIN 12    
-#define DHTTYPE DHT11  
+#define DHTPIN 4
+#define DHTTYPE DHT11
+// WiFi Credentials
+// const char* ssid = "";
+// const char* password = "";
+
+// // AppScript Endpoint
+// const char* endpoint = "";
+
+WiFiClientSecure secureClient;
+HTTPClient http;
+int currPeriod = 2000;  // 2 seconds
+DHT dht(DHTPIN, DHTTYPE);
+unsigned long lastMsg = 0;
+#define MSG_BUFFER_SIZE (500)
+char msg[MSG_BUFFER_SIZE];
 
 
-bool Sensor_DHT11 = 1;
-DHT_Unified dht(DHTPIN, DHTTYPE);
-uint32_t delayMS;
-WiFiSSLClient client; 
+// Google Certificate
+//const char* google_root_ca = "";
 
 
-int status = WL_IDLE_STATUS;
-int samplingPeriod = 3; // in seconds
+String getSensorReading(){
+  float h = dht.readHumidity();
+  // Read temperature as Celsius (the default)
+  float t = dht.readTemperature();
+  // Read temperature as Fahrenheit (isFahrenheit = true)
+  float f = dht.readTemperature(true);
+snprintf(msg, MSG_BUFFER_SIZE, "{\"command\":\"addData\", \"data\":[%.2f, %.2f, %.2f]}", h, t, f);  return msg;
+}
 
-struct ServerInfo{
-  String server_google_script;
-  String server_google_usercontent;
-};
 
-struct WiFiInfo{
-  String ssid;
-  String passcode;
-  String gsid;
-};
+void connectToWIFI() {
+  // Set WiFi to Station mode
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  Serial.print("Connecting to WiFi ..");
 
-struct SensorData {
-  String temp_DHT11_sensor;
-  String humidity_DHT11_sensor;
-};
+  // Wait for connection
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
 
-ServerInfo server_info;
+  Serial.println("");
+  Serial.println("Connected to the WiFi network");
+  Serial.print("IP Address: ");
+  Serial.println(WiFi.localIP());  // Print local IP
+}
 
-WiFiInfo wifi_info;
-
-SensorData sensor_data;
+void doPost(String payloadData) {
+  http.begin(secureClient, endpoint);
+  http.addHeader("Content-Type", "application/json");
+  int code = http.POST(payloadData);
+  String response = http.getString();
+  Serial.println("POST response code: " + String(code));
+  Serial.println("POST response: " + response);
+  http.end();
+}
 
 
 void setup() {
-  Serial.begin(9600);
-  while (!Serial);
-  WiFi.setPins(8, 7, 4, 2);
-  server_info.server_google_script = "script.google.com"; 
-  server_info.server_google_usercontent = "script.googleusercontent.com"; 
-  AP_getInfo();
-
-  String header = "{\"command\":\"addHeader\", \"header\":[";
-  if (Sensor_DHT11)
-  {
-    initializeDHT11();
-    header.concat("\"temp_DHT11_sensor\",");
-    header.concat("\"humidity_DHT11_sensor\"");
+  Serial.begin(115200);
+  while (!Serial) {
+    ;  // Wait for serial port to connect
   }
-  header.concat("]}");
-
-  connectToWiFi();
-  initializeClient(server_info.server_google_script);
-  String response = httpPost(header, server_info.server_google_script);
-  Serial.println("Sensor starts collecting data...");
-}
+  Serial.println("Serial Connected!");
+  connectToWIFI();
+  secureClient.setCACert(google_root_ca);
+  // Add Header
+doPost("{\"command\": \"addHeader\", \"header\":[\"Humidity\", \"Temperature C\", \"Temperature F\"]}");}
 
 void loop() {
-  String payload = "{\"command\":\"addRow\", \"data\":[";
-  bool firstItem = true;
-
-  if (Sensor_DHT11) 
-  {
-    runDHT11(); 
-     if (!firstItem) payload.concat(",");
-    payload.concat("\"" + sensor_data.temp_DHT11_sensor + "\"");
-    firstItem = false;
-    
-    if (!firstItem) payload.concat(",");
-    payload.concat("\"" + sensor_data.humidity_DHT11_sensor + "\"");
-    firstItem = false;
-  }
-
-  payload.concat("]}");
-
-  // Are we still connected to WiFi
-  String response;
-  if (status != WL_CONNECTED){
-    connectToWiFi();
-  } else{
-    // Connected to the correct script server
-    initializeClient(server_info.server_google_script);
-    response = httpPost(payload, server_info.server_google_script);
-  }
-  delay(1000*samplingPeriod);
+  // Get sensor reading and Post sensor reading 
+  doPost(getSensorReading());               
  
+  // Wait 1 minute 
+  delay(60000);
 }

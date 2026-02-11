@@ -5,9 +5,10 @@ and then create the char object.
 */
 
 // Get a reference to the chart object
-const ctx = document.getElementById("sensor-id");
+const sensorDiv = document.getElementById("sensor");
 const temperatureDiv = document.getElementById("temperature");
 const humidityDiv = document.getElementById("humidity");
+
 const myChart = new Chart(ctx, {
     type: 'line',
     data: {

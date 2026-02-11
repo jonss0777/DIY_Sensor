@@ -1,0 +1,56 @@
+body{
+    padding: 0px;
+    margin: 0px;
+    background-color: rgb(254, 254, 254);
+    color: rgb(0, 0, 0);
+}
+
+
+header{
+    display: flex;
+    row-gap: 20px;
+    padding: 0px;
+    margin: 0px;
+    background-color: rgb(3, 26, 51);
+    color: white;
+    
+}
+
+header > div{
+    padding: 10px 10px 10px 10px;
+    margin: 10px 10px 10px 10px;
+}
+
+header > div > a{
+    color: white;
+}
+
+header > div > a:hover{
+    color: red;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 10px 10px 30px;
+    
+}
+
+#chart-container{
+    margin: 0px;
+    padding: 0px;
+}
+
+#temperature{
+    margin: 0px;
+    padding: 0px;
+    
+}
+
+
+#humidity{
+
+    margin: 0px;
+    padding: 0px;
+}
