@@ -17,27 +17,6 @@ Wiring:
     C[Spring Boot HTPP Client] -->|Send get request to AppScript|B
   
 ```
-### HTTP Client Code
-For this project I used AppScript as it can be used as a free public web server and google sheets as our database. 
-
-One important thing to note is that the response from the web server is a content service object that requires the client to perform a redirect in order to see the returned content. 
-
-```
-// The server.js contains the code for the web server to work as an api.
-
-
-
-```
-
-### HTTP Sensor Code:
-For the ESP32 we have to flash the Certificate of Authority(CA) to the board. The CA can be optained using openssl.
-
-
-
-```
-//
-
-```
 
 ### Architechture MQTT
 
@@ -46,22 +25,14 @@ For the ESP32 we have to flash the Certificate of Authority(CA) to the board. Th
     A[Micro controller] -->|Sends publish to topic| B(HiveMQ Server receiveces a published request to some topic from the micro controller.)
     C[Spring Boot MQTT Client] -->|Subscribe to HiveMQ Broker|B
 ```
-### MQTT Client Code
-For the ESP32 we have to flash the Certificate of Authority(CA) to the board. The CA can be optained using openssl.
-
-```
-```
-
-
-
-### MQTT Sensor Code:
-```
-
-
-```
    
 Reference: 
- - [HiveMQ Guide](https://docs.hivemq.com/hivemq/latest/user-guide/index.html)
+ - [AppScrip Documentation](https://developers.google.com/apps-script/guides/sheets)
+ - [What is a server? Mozzilla](https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_web_server)
+ - [HiveMQ Guide What is a broker? What is MQTT?](https://docs.hivemq.com/hivemq/latest/user-guide/index.html)
+ - [Better Log](https://github.com/peterherrmann/BetterLog)
+
+
 
 
 
