@@ -1,3 +1,5 @@
+import secrets from "./secrets.js";
+
 
 /*
 TODO: To make the graph more dynamic. The get request on the AppScript could be used to get the columns and other char config information, 
@@ -5,17 +7,53 @@ and then create the char object.
 */
 
 // Get a reference to the chart object
-const sensorDiv = document.getElementById("sensor");
-const temperatureDiv = document.getElementById("temperature");
-const humidityDiv = document.getElementById("humidity");
+const sensor = document.getElementById("sensor");
+const dataCard = document.getElementById("data-card-container");
+const temperatureC = document.getElementById("temperatureC");
+const temperatureF = document.getElementById("temperatureF");
 
-const myChart = new Chart(ctx, {
+const humidity = document.getElementById("humidity");
+
+//function addData(chart, label, values) {
+function addData(chart, data) {
+    chart.data.labels = [];
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data = [];
+    });
+    data.forEach(entry => {
+        const time = entry[0];
+        const humidity = entry[1];
+        const tempC = entry[2];
+        const tempF = entry[3];
+
+        // Optional: format time nicely
+        const formattedTime = new Date(time).toLocaleTimeString();
+
+        chart.data.labels.push(formattedTime);
+        chart.data.datasets[0].data.push(humidity); // Humidity
+        chart.data.datasets[1].data.push(tempC); // Temp C
+        chart.data.datasets[2].data.push(tempF); // Temp F
+    });
+    chart.update();
+}
+
+// function removeData(chart) {
+//     chart.data.labels = [];
+//     chart.data.datasets.forEach((dataset) => {
+//         dataset.data = [];
+//     });
+//     chart.update();
+// }
+
+
+
+const sensorChart = new Chart(sensor, {
     type: 'line',
     data: {
         labels: [],
         datasets: [
             {
-                label: 'Temperature', // This is the first dataset
+                label: 'Humidity %',
                 data: [],
                 borderWidth: 2,
                 borderColor: 'rgba(255, 99, 132, 1)',
@@ -24,11 +62,20 @@ const myChart = new Chart(ctx, {
                 pointRadius: 0,
             },
             {
-                label: 'Humidity', // This is the second dataset
+                label: 'Temperature C',
                 data: [],
                 borderWidth: 2,
-                borderColor: 'rgba(54, 162, 235, 1)', // Blue color for humidity
+                borderColor: 'rgba(54, 162, 235, 1)',
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                tension: 0.1,
+                pointRadius: 0
+            },
+            {
+                label: 'Temperature F',
+                data: [],
+                borderWidth: 2,
+                borderColor: 'rgb(0, 245, 98)',
+                backgroundColor: 'rgb(51, 114, 76)',
                 tension: 0.1,
                 pointRadius: 0
             }
@@ -47,110 +94,55 @@ const myChart = new Chart(ctx, {
             y: {
                 beginAtZero: false, // Set to false so the chart isn't squashed
                 min: -20, // This sets the minimum value of the y-axis
-                max: 100, // This sets the maximum value of the y-axis
+                max: 150, // This sets the maximum value of the y-axis
                 title: {
                     display: true,
-                    text: 'Temp °C and Humidity'
+                    text: 'Humidity and Temp °C and Temp °F'
                 }
             }
         }
     }
 });
 
-async function loadData(ENDPOINT, key, payload) {
-    // Variable to hold the result, declared outside the try block
+async function loadData() {
+    console.log("Calling loadData");
     let result = null;
 
     try {
-        const response = await fetch(ENDPOINT, {
+        const response = await fetch(`${ENDPOINT}?numOfRows=100&query=getData&recent=True`);
 
-            method: "POST",
-            body: JSON.stringify(payload),
-            // headers: {
-            //     "Content-Type": "application/json"
-            // }
-        });
-
-        if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`Status: ${response.status}`);
 
         result = await response.json();
+        const rowData = result.data[0];
 
+        if (rowData) {
+            // 1. Update the text
+            humidity.textContent = `${rowData[1]} %`;
+            temperatureC.textContent = `${rowData[2]} °C`;
+            temperatureF.textContent = `${rowData[3]} °F`;
+
+
+            // 2. Trigger the animation
+            dataCard.classList.remove("data-update"); // Reset
+            void dataCard.offsetWidth;                // Trigger a "reflow" to restart animation
+            dataCard.classList.add("data-update");    // Start
+
+        }
     } catch (error) {
         console.error("Failed to fetch data:", error.message);
-        return;
     }
-
-
-    switch (key) {
-        case "columns":
-
-            //console.log("COLUMNS:", result.columns )
-            if (result && result.columns) {
-                for (let index = 1; index < result.columns.length; index++) {
-
-                    myChart.data.datasets[index - 1].label = result.columns[index];
-                }
-            }
-            break;
-
-        case "rows":
-
-            //console.log("ROWS:", result.rows);
-
-            if (result && result.rows && Array.isArray(result.rows)) {
-
-                for (let i = 0; i < result.rows.length; i++) {
-                    const row = result.rows[i];
-
-                    if (Array.isArray(row)) {
-                        for (let j = 0; j < row.length; j++) {
-                            if (j == 0) {
-                                const datetime = new Date(row[j]);
-                                myChart.data.labels.push(`${datetime.getHours()}:${datetime.getMinutes()}:${datetime.getSeconds()}`);
-
-                            }
-                            else { myChart.data.datasets[j - 1].data.push(row[j]); }
-                        }
-                    }
-                }
-
-                // If the graph is empty this expression will always be false
-                if (myChart.data.datasets[0].data.length > result.rows.length) {
-                    for (let i = 0; i < result.rows.length; i++) {
-                        myChart.data.labels.shift();
-                        for (let j = 0; j < myChart.data.datasets.length; j++) {
-                            console.log(j);
-                            myChart.data.datasets[j].data.shift();
-                        }
-                    }
-                }
-
-
-                const lastrow = result.rows.length - 1;
-                const tempCol = 1;
-                const humidCol = 2;
-
-                temperatureDiv.innerHTML = result.rows[lastrow][tempCol];
-                humidityDiv.innerHTML = result.rows[lastrow][humidCol];
-            }
-
-            break;
-
-        default:
-            console.log("key was unrecognized");
-            break;
-    }
-    myChart.update();
+    //removeData(sensorChart)
+    //addData(sensorChart, result[0], result.data.slice(1))
+    addData(sensorChart, result.data)
 }
 
 
-const ENDPOINT = "SERVER_URL";
-loadData(ENDPOINT, key = "columns", { key: "columns", command: "getData" });
-loadData(ENDPOINT, key = "rows", { command: "getData", key: "rows", way: "x", nrows: 600 });
+const ENDPOINT = secrets.ENDPOINT;
+loadData(ENDPOINT);
+
 setInterval(() => {
-    loadData(ENDPOINT, key = "rows", { command: "getData", key: "rows", way: "from_to", _from: myChart.data.datasets[0].data[myChart.data.datasets[0].data.length - 1] });
-}, 18000000);
+    loadData(ENDPOINT);
+}, 60000);
 
 

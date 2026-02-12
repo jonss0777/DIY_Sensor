@@ -12,23 +12,40 @@
 
 <body>
     <header>
-        <div><a href="">Home</a></div>
-        <div><a href="">More</a></div>
+        <div><a href="home.html">Home</a></div>
+        <div><a href="learn.html">Learn how to...</a></div>
     </header>
+    <main>
     <div class="content">
         <div id="chart-container">
-            <h1>Jon DIY Sensor</h1>
+            <h1>Jon - DIY Sensor</h1>
+            <div id="chart">
+                
             <canvas id="sensor"></canvas>
+            </div>
+        </div>
+        <div id="data-card-container">
+            <div>
+                <p>Temperature C</p>
+                <p id="temperatureC"></p>
+            </div>
+            <div>
+                <p>Temperature F</p>
+                <p id="temperatureF"></p>
+            </div>
+            <div>
+                <p>Humidity</p>
+                <p id="humidity"></p>
+            </div>
         </div>
         <div>
-            <p>Temperature:</p>
-            <div id="temperature"></div>
-        </div>
-        <div>
-            <p>Humidity:</p>
-            <div id="humidity"></div>
+            Want to learn how to make you own sensor?
+            <a href="learn.html">Go to Learn how to..</a>
         </div>
     </div>
+    </main>
+    <script type="module" src="script.js" defer></script>
+
 </body>
 
 </html>

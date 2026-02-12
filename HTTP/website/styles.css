@@ -1,56 +1,145 @@
-body{
+body {
     padding: 0px;
     margin: 0px;
     background-color: rgb(254, 254, 254);
     color: rgb(0, 0, 0);
+    font-family: "Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
 }
 
 
-header{
+header {
     display: flex;
     row-gap: 20px;
     padding: 0px;
     margin: 0px;
     background-color: rgb(3, 26, 51);
     color: white;
-    
+
+
 }
 
-header > div{
+header>div {
     padding: 10px 10px 10px 10px;
     margin: 10px 10px 10px 10px;
 }
 
-header > div > a{
+header>div>a {
     color: white;
 }
 
-header > div > a:hover{
+header>div>a:hover {
     color: red;
 }
 
-.content{
+main {
+    .content {
+        display: flex;
+        flex-direction: column;
+        margin: 0px 0px 0px 0px;
+        padding: 0px 10px 10px 30px;
+        align-items: center;
+
+    }
+}
+
+
+.content {
     display: flex;
     flex-direction: column;
     margin: 0px 0px 0px 0px;
     padding: 0px 10px 10px 30px;
-    
+
+
 }
 
-#chart-container{
+#chart-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+   
+}
+
+#chart {
+    align-items: center;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    width: 700px;
+    height: 400px;
+}
+
+#temperature {
+    margin: 0px;
+    padding: 0px;
+
+}
+
+#humidity {
     margin: 0px;
     padding: 0px;
 }
 
-#temperature{
-    margin: 0px;
-    padding: 0px;
-    
+
+
+#data-card-container {
+    display: flex;
+    flex-direction: row;
+    padding: 2px 2px 2px 2px;
+    margin: 10px 10px 10px 10px;
+}
+
+#data-card-container>div {
+    margin: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
+    width: 120px;
+    /* background-color: rgb(179, 190, 244); */
+    border-radius: 10%;
+    justify-content: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+   
+}
+
+#data-card-container > div > p{
+    text-align: center;
 }
 
 
-#humidity{
+/* The highlight animation */
+@keyframes highlight-fade {
+    0% {
+        background-color: lightblue;
+    }
 
-    margin: 0px;
+    100% {
+        background-color: transparent;
+    }
+}
+
+/* A class we can toggle */
+.data-update {
+    animation: highlight-fade 1.5s ease-out;
+}
+
+.card {
+    display: flex;
+    color: white;
+    padding: 10px;
+    margin: 20px;
+    background-color: rgb(12, 72, 136);
+    border-radius: 10%;
+    width: 400px;
+    height: 300px;
+    /* opacity: 90%; */
+    box-shadow: 10px 10px #888888;
+}
+
+.card>img {
     padding: 0px;
+    margin: 0px;
+
 }
