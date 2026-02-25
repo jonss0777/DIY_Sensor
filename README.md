@@ -14,7 +14,7 @@ Wiring:
   flowchart TD
     A[Micro controller] -->|Sends post request to AppScript| B(App Script Webserver handles the request by storing the information in a sheet and seding a success response.)
 
-    C[HTML, CSS, and JS HTPP Client] -->|Send get request to AppScript|B
+    C[HTTP Client] -->|Send get request to AppScript|B
   
 ```
 
