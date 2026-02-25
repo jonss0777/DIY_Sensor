@@ -33,6 +33,9 @@ Reference:
  - [Better Log](https://github.com/peterherrmann/BetterLog)
 
 
+// Updates
+2/24/2026 - Adding C to F button. Adding black and white mode. 
+
 
 
 

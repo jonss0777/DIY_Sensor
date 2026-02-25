@@ -1,34 +1,49 @@
+:root{
+    color-scheme: light dark;
+}
+
 body {
     padding: 0px;
     margin: 0px;
-    background-color: rgb(254, 254, 254);
-    color: rgb(0, 0, 0);
+    background-color: light-dark(#fffcf2, #0b0b0a);
+    color: light-dark(#333, #fff);
+
     font-family: "Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
 }
 
-
 header {
     display: flex;
     row-gap: 20px;
     padding: 0px;
     margin: 0px;
-    background-color: rgb(3, 26, 51);
+    background-color: light-dark(#222225, #000000);
     color: white;
-
-
 }
 
-header>div {
+#header-left-content{
     padding: 10px 10px 10px 10px;
     margin: 10px 10px 10px 10px;
 }
 
-header>div>a {
+#header-left-content > a{
     color: white;
 }
+
+#header-right-content{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    align-items: left;   
+}
+
+
+#header-right-content> button{
+    width:70px;  
+}
+
 
 header>div>a:hover {
     color: red;
@@ -82,8 +97,6 @@ main {
     padding: 0px;
 }
 
-
-
 #data-card-container {
     display: flex;
     flex-direction: row;
@@ -108,6 +121,45 @@ main {
     text-align: center;
 }
 
+#timestamp{
+    color:rgb(3, 214, 112);
+   
+
+}
+
+
+#settings-button{
+    width: 100%;
+    height: 100%;
+    border-radius: 0%;
+}
+
+
+#settings-window{
+  display: none;
+  position: absolute;
+  z-index:1;
+  right: 0;
+  /* top: 0px; */
+  width: 300px;
+  height: 100px;
+  background-color: #403d39;
+  color:#fffcf2;
+  align-items: center;
+}
+
+#setting-content{
+    background-color: cad2c5;
+    padding: 20px;
+    border:1px;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 4 px 8px 0 rebeccapurple 0 6px;
+    text-align: center;
+}
+
+
+/* Meassurements */
 
 /* The highlight animation */
 @keyframes highlight-fade {
@@ -142,4 +194,66 @@ main {
     padding: 0px;
     margin: 0px;
 
+}
+
+
+/* Setting buttons */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #76746e;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #eb5e28;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #ffffff;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #ffffff;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }

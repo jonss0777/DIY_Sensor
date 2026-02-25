@@ -12,39 +12,54 @@
 
 <body>
     <header>
-        <div><a href="home.html">Home</a></div>
-        <div><a href="learn.html">Learn how to...</a></div>
+        <div id="header-left-content"><a href="home.html">Home</a></div>
+        <div id="header-right-content">
+            <button id="settings-button">Settings</button>
+        </div>
     </header>
     <main>
-    <div class="content">
-        <div id="chart-container">
-            <h1>Jon - DIY Sensor</h1>
-            <div id="chart">
-                
-            <canvas id="sensor"></canvas>
+        <div id="settings-window">
+            <div id="setting-content">
+                <div>
+                    <p>Switch to F from C</p>
+                    <label class="switch" >
+                        <input id="switchbtn" type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
         </div>
-        <div id="data-card-container">
-            <div>
-                <p>Temperature C</p>
-                <p id="temperatureC"></p>
+
+        <div class="content">
+
+            <div id="chart-container">
+                <h1>DIY Sensor</h1>
+
+                <div id="chart">
+
+                    <canvas id="sensor"></canvas>
+                </div>
             </div>
-            <div>
-                <p>Temperature F</p>
-                <p id="temperatureF"></p>
+            <div id="data-card-container">
+                <div>
+                    <p>Temperature</p>
+                    <p id="temperature"></p>
+                </div>
+               
+                <div>
+                    <p>Humidity</p>
+                    <p id="humidity"></p>
+                </div>
+                <div id="timestamp"> 
+                <p id="recent_timestamp">Last reading: </p>
+                </div>
             </div>
-            <div>
-                <p>Humidity</p>
-                <p id="humidity"></p>
-            </div>
+            
+
         </div>
-        <div>
-            Want to learn how to make you own sensor?
-            <a href="learn.html">Go to Learn how to..</a>
-        </div>
-    </div>
     </main>
     <script type="module" src="script.js" defer></script>
+
 
 </body>
 
