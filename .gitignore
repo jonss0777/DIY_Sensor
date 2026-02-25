@@ -6,4 +6,4 @@ application.properties
 .vscode/
 secrets.js
 *.zip
-MQTT
+MQTT/
