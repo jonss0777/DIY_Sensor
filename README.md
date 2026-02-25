@@ -18,21 +18,6 @@ Wiring:
   
 ```
 
-### Architechture MQTT
-
-```mermaid
-   flowchart TD
-    A[Micro controller] -->|Sends publish to topic| B(HiveMQ Server receiveces a published request to some topic from the micro controller.)
-    C[Spring Boot MQTT Client] -->|Subscribe to HiveMQ Broker|B
-```
-   
-Reference: 
- - [AppScrip Documentation](https://developers.google.com/apps-script/guides/sheets)
- - [What is a server? Mozzilla](https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_web_server)
- - [HiveMQ Guide What is a broker? What is MQTT?](https://docs.hivemq.com/hivemq/latest/user-guide/index.html)
- - [Better Log](https://github.com/peterherrmann/BetterLog)
-
-
 // Updates
 2/24/2026 - Adding C to F button. Adding black and white mode. 
 
