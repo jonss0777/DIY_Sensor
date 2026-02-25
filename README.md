@@ -3,10 +3,7 @@
 Components you will need:
  - ESP32 
  - DHT11 Keys Temperature and Humidity Sensor
- - Services AppScript or HiveMQ
-
-Wiring:
-
+ - Services AppScript
 
 ### Architechture HTTP
 
