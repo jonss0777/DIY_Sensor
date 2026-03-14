@@ -15,7 +15,11 @@ Components you will need:
   
 ```
 
-// Updates
+
+### Walkthrough
+<img src='https://github.com/jonss0777/DIY_Sensor/blob/a51370c433fa4a4c2cd80e032c79ffe325e2ca9e/WebsiteGif.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+### Updates
 2/24/2026 - Adding C to F button. Adding black and white mode. 
 
 
