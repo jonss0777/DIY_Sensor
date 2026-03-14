@@ -22,6 +22,7 @@ Components you will need:
 ### Updates
 2/24/2026 - Adding C to F button. Adding black and white mode. 
 
+3/14/2025 - Added automatic change in flex direction and canvas resizing for devices with 600-max width. Making it fit in smaller screens.
 
 
 
