@@ -6,4 +6,6 @@ application.properties
 .vscode/
 secrets.js
 *.zip
-MQTT/
+
+Kconfig.projbuild
+esp-code/sensor/build

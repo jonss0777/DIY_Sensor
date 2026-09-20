@@ -12,16 +12,13 @@ Wiring:
 
 ```mermaid
   flowchart TD
-    A[Micro controller] -->|Sends post request to AppScript| B(App Script Webserver handles the request by storing the information in a sheet and seding a success response.)
-
-    C[Spring Boot HTPP Client] -->|Send get request to AppScript|B
+    A[ESP32 Sensor] -->|Send data to topic in Mosquito| B()
+    C[MQTT Client] -->|Mosquito Server|B()
+    D[AWS Timestream] --> |Store sensor data| C()
   
 ```
 
 // Updates
-2/24/2026 - Adding C to F button. Adding black and white mode. 
+- 2/24/2026 - Adding C to F button. Adding black and white mode. 
 
-
-
-
-
+- 9/19/2026 - Rewriting DTH.h from Arduino code to ESP32 framework code.
