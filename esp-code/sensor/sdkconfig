@@ -712,8 +712,11 @@ CONFIG_PARTITION_TABLE_MD5=y
 CONFIG_MY_WIFI_SSID="ProbDos_IoT"
 # default:
 CONFIG_MY_WIFI_PASSWORD="@NopJo45@0"
+CONFIG_MY_MQTT_BROKER_URL="mqtt://192.168.50.193"
 # default:
-CONFIG_MY_MQTT_BROKER_URL="mqtt://192.168.1.100"
+CONFIG_MY_MQTT_USERNAME="dummy"
+# default:
+CONFIG_MY_MQTT_PASSWORD="@Rambo"
 # end of Project Configuration Variables
 
 #

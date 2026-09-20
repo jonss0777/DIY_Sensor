@@ -1,12 +1,8 @@
 #include "dht.h"
-
 #include "esp_rom_sys.h"      // Required for esp_rom_delay_us()
-#include "esp_timer.h"        // Required for esp_timer_get_time()
 #include "driver/gpio.h"      // Required for gpio_config, gpio_set_level, etc.
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-
-#define DHT_TIMEOUT_US 100
 
 static portMUX_TYPE dht_spinlock = portMUX_INITIALIZER_UNLOCKED;
 
@@ -27,14 +23,17 @@ esp_err_t dht_init(dht_sensor_t *dev, gpio_num_t pin, dht_type_t type) {
     return gpio_config(&io_conf);
 }
 
-static int32_t dht_wait_state(gpio_num_t pin, int level) {
-    int64_t start_time = esp_timer_get_time();
+// Fast timeout reader: uses microsecond delays rather than heavy 64-bit timer reads
+static int32_t dht_wait_state_fast(gpio_num_t pin, int level, int32_t timeout_us) {
+    int32_t micros = 0;
     while (gpio_get_level(pin) == level) {
-        if ((esp_timer_get_time() - start_time) > DHT_TIMEOUT_US) {
+        if (micros >= timeout_us) {
             return -1;
         }
+        esp_rom_delay_us(1);
+        micros++;
     }
-    return (int32_t)(esp_timer_get_time() - start_time);
+    return micros;
 }
 
 esp_err_t dht_read_data(const dht_sensor_t *dev, float *humidity, float *temperature) {
@@ -47,27 +46,23 @@ esp_err_t dht_read_data(const dht_sensor_t *dev, float *humidity, float *tempera
     if (dev->type == DHT_TYPE_DHT11) {
         vTaskDelay(pdMS_TO_TICKS(20)); // DHT11 needs at least 18ms LOW
     } else {
-        vTaskDelay(pdMS_TO_TICKS(2));  // DHT22/AM2302 needs 1-2ms LOW
+        vTaskDelay(pdMS_TO_TICKS(2));  // DHT22 needs 1-2ms LOW
     }
 
-    // Release line and switch back to input with pull-up
+    // Release line and set to high-impedance input with pull-up
     gpio_set_level(dev->pin, 1);
-    esp_rom_delay_us(30);
     gpio_set_direction(dev->pin, GPIO_MODE_INPUT);
+    esp_rom_delay_us(40); // Allow line to float back HIGH and sensor to pull LOW
 
-    // 2. Critical Section for timing
+    // 2. Critical Section for precise bit-bang timing
     portENTER_CRITICAL(&dht_spinlock);
 
-    // Sensor ACK response: Wait for line to go LOW (80us), then wait for line to go HIGH (80us)
-    if (dht_wait_state(dev->pin, 1) < 0) { // Wait for initial HIGH to end (sensor pulls line LOW)
+    // Sensor ACK: Expect 80us LOW followed by 80us HIGH
+    if (dht_wait_state_fast(dev->pin, 0, 100) < 0) { // Wait for LOW ACK to finish
         portEXIT_CRITICAL(&dht_spinlock);
         return ESP_ERR_TIMEOUT;
     }
-    if (dht_wait_state(dev->pin, 0) < 0) { // Wait for LOW ACK pulse to end
-        portEXIT_CRITICAL(&dht_spinlock);
-        return ESP_ERR_TIMEOUT;
-    }
-    if (dht_wait_state(dev->pin, 1) < 0) { // Wait for HIGH ACK pulse to end
+    if (dht_wait_state_fast(dev->pin, 1, 100) < 0) { // Wait for HIGH ACK to finish
         portEXIT_CRITICAL(&dht_spinlock);
         return ESP_ERR_TIMEOUT;
     }
@@ -75,20 +70,20 @@ esp_err_t dht_read_data(const dht_sensor_t *dev, float *humidity, float *tempera
     // 3. Read 40 bits of data
     for (int i = 0; i < 40; i++) {
         // Each bit starts with a 50us LOW pulse
-        if (dht_wait_state(dev->pin, 0) < 0) {
+        if (dht_wait_state_fast(dev->pin, 0, 100) < 0) {
             portEXIT_CRITICAL(&dht_spinlock);
             return ESP_ERR_TIMEOUT;
         }
 
-        // Measure length of HIGH pulse (26-28us = 0, 70us = 1)
-        int32_t high_duration = dht_wait_state(dev->pin, 1);
+        // Measure duration of the HIGH pulse (26-28us = '0', 70us = '1')
+        int32_t high_duration = dht_wait_state_fast(dev->pin, 1, 100);
         if (high_duration < 0) {
             portEXIT_CRITICAL(&dht_spinlock);
             return ESP_ERR_TIMEOUT;
         }
 
         data[i / 8] <<= 1;
-        if (high_duration > 40) { // If HIGH > 40us, bit is '1'
+        if (high_duration > 40) { // If HIGH duration > 40us, it's a '1'
             data[i / 8] |= 1;
         }
     }
