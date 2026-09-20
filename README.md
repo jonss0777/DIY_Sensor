@@ -1,4 +1,7 @@
-# Temperatur and Humidity Sensor
+# Temperature and Humidity Sensor
+
+Host your local temperature and humidity sensor. Store the data in AWS timestream and visualiaze it. 
+
 
 Components you will need:
  - Micro-controller  ESP32 
@@ -64,11 +67,9 @@ Check if another service is using the same port
 
 ```
 sudo ss -tulpn | grep 1883
-
 ```
 
-Test broker
-
+Test broker use a different terminal for each command
 
 ```
 mosquitto_pub -h localhost -t "my/test/topic" -u "myusername" -P "yourpassword" -m "Hello World"
@@ -83,3 +84,7 @@ mosquitto_sub -h localhost -t "my/test/topic" -u "myusername" -P "yourpassword"
 ### Updates
 
 - 9/19/2026 - Rewriting DTH.h from Arduino code to ESP32 framework code.
+
+- 9/20/2026 - Set up Mosquito broker in Raspberry Pi.
+
+
