@@ -1,12 +1,9 @@
 # DIY Sensor
 
 Components you will need:
- - ESP32 
- - DHT11 Keys Temperature and Humidity Sensor
- - Services AppScript or HiveMQ
-
-Wiring:
-
+ - Micro-controller  ESP32 
+ - Sensor            DHT11 Keys Temperature and Humidity Sensor
+ - Services          AppScript
 
 ### Architechture HTTP
 
